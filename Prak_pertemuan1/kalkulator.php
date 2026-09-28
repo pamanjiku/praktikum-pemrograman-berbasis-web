@@ -1,0 +1,36 @@
+<?php
+// kalkulator.php
+$hasil = null;
+$pesan = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $a = (float) ($_POST['a'] ?? 0);
+    $b = (float) ($_POST['b'] ?? 0);
+    $operator = $_POST['operator'] ?? '+';
+
+    switch ($operator) {
+        case '+':
+            $hasil = $a + $b;
+            break;
+
+        case '-':
+            $hasil = $a - $b;
+            break;
+
+        case '*':
+            $hasil = $a * $b;
+            break;
+
+        case '/':
+            if ($b == 0) {
+                $pesan = 'Pembagian dengan nol tidak diperbolehkan.';
+            } else {
+                $hasil = $a / $b;
+            }
+            break;
+
+        default:
+            $pesan = 'Operator tidak valid.';
+    }
+}
+?>
